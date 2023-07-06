@@ -1,4 +1,6 @@
-FROM php:5.6.30-fpm-alpine
+FROM php:fpm
+
+RUN docker-php-ext-install pdo pdo_mysql
 
 COPY . /app
 WORKDIR /app
