@@ -3,28 +3,80 @@
 namespace App\Models;
 
 use JsonSerializable;
+use DateTime;
 
 class Facility implements JsonSerializable {
 
   private ?int $id;
-  private String $name;
-  private String $date;
+  private string $name;
+  private string $creationDate;
   private Location $location;
 
 
   /**
    * @param string $name
-   * @param string $date
+   * @param string $creationDate
    * @param Location $location
    * @param int $id
    */
   //id at end to make it optional
-  function __construct($name, $date, $location, $id = null){
+  function __construct($name, $creationDate, $location, $id = null){
     $this->name = $name;
-    $this->date = $date;
+    $this->creationDate = $creationDate;
     $this->location = $location;
     $this->id = $id;
   }
+
+  public function getId(): int {
+    return $this->id;
+  }
+
+  /**
+   * @param int $id
+   * @return self
+   */
+  public function setId($id) {
+    $this->id = $id;
+    return $this;
+  }
+
+
+  public function getName() : string {
+    return $this->name;
+  }
+
+  /**
+   * @param string $name
+   * @return Facility
+   */
+  public function setName($name) {
+    $this->name = $name;
+    return $this;
+  }
+  public function getCreationDate(): string {
+    return $this->creationDate;
+  }
+
+  /**
+   * @param string $date
+   */
+  public function setCreationDate($date): self {
+    $this->creationDate = $date;
+    return $this;
+  }
+
+  public function getLocation(): Location {
+    return $this->location;
+  }
+/**
+ * @param Location $location
+ * @return Facility
+ */
+  public function setLocation($location){
+    $this->location = $location;
+    return $this;
+  }
+
 
   //serialize output for status messages
   public function jsonSerialize(): mixed
@@ -32,7 +84,7 @@ class Facility implements JsonSerializable {
     return [
       'id' => $this->id,
       'name' => $this->name,
-      'date' => $this->date,
+      'creationDate' => $this->creationDate,
       'location' => $this->location
     ];
   }

@@ -77,7 +77,7 @@ class Db implements IDb {
     /**
      * @param string $query
      * @param array $bind
-     * @return array
+     * @return mixed
      */
     public function executeGetOneRecordQuery(string $query, array $bind){
         $this->stmt = $this->connection->prepare($query);

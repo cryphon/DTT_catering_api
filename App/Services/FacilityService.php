@@ -13,7 +13,23 @@ class FacilityService {
   }
 
   public function getAllFacilities(): array {
-    $f =  $this->facilityRepo->getAllFacilities();
-    return $f;
+    return $this->facilityRepo->getAllFacilities();
+  }
+
+  /**
+   * @param int $id
+   * @return Facility
+   */
+  public function getFacilityById($id){
+    return $this->facilityRepo->getFacilityById($id);
+  }
+
+
+  /**
+   * @param Facility $facility
+   * @return Facility
+   */
+  public function createNewFacility($facility){
+    return $this->facilityRepo->createNewFacility($facility);
   }
 }

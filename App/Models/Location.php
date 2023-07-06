@@ -38,4 +38,16 @@ class Location implements JsonSerializable {
       'phoneNumber' => $this->phoneNumber,
     ];
   }
+
+  public function getId(): int {
+    return $this->id;
+  }
+
+  /**
+   * @param int id
+   */
+  public function setId($id): self {
+    $this->id = $id;
+    return $this;
+  }
 }
