@@ -10,21 +10,27 @@ class Facility implements JsonSerializable {
   private ?int $id;
   private string $name;
   private string $creationDate;
+  
+  //use of locationId to reduce the amount of queries needed to create a facility
+  private int $locationId;
   private Location $location;
+  private ?array $tags;
 
 
   /**
    * @param string $name
    * @param string $creationDate
-   * @param Location $location
+   * @param Location $locationId
    * @param int $id
+   * @param array $tags
    */
   //id at end to make it optional
-  function __construct($name, $creationDate, $location, $id = null){
+  function __construct($name, $creationDate, $locationId, $id = null, $tags = []){
     $this->name = $name;
     $this->creationDate = $creationDate;
-    $this->location = $location;
+    $this->locationId = $locationId;
     $this->id = $id;
+    $this->tags = $tags;
   }
 
   public function getId(): int {
@@ -65,6 +71,19 @@ class Facility implements JsonSerializable {
     return $this;
   }
 
+  public function getLocationId(): int {
+    return $this->locationId;
+  }
+  /**
+  * @param int $locationId
+  * @return Facility
+  */
+  public function setLocationId($locationId){
+    $this->location = $locationId;
+    return $this;
+  }
+  
+
   public function getLocation(): Location {
     return $this->location;
   }
@@ -78,14 +97,28 @@ class Facility implements JsonSerializable {
   }
 
 
+  public function getTags(): array {
+    return $this->tags;
+  }
+
+  /**
+   * @param array $tags
+   * @return Facility
+   */
+  public function setTags($tags){
+    $this->tags = $tags;
+    return $this;
+  }
+
   //serialize output for status messages
   public function jsonSerialize(): mixed
   {
     return [
-      'id' => $this->id,
+      'facilityId' => $this->id,
       'name' => $this->name,
       'creationDate' => $this->creationDate,
-      'location' => $this->location
+      'location' => $this->location,
+      'tags' => $this->tags
     ];
   }
 }

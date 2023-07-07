@@ -16,16 +16,13 @@ class FacilityRepository extends Repository{
    */
   public function getAllFacilities() {
    // init location service
-
-   $locationService = new LocationService();
     
     $objects = $this->db->executeGetListRecordsQuery("SELECT id,name, creationDate, locationId FROM Facility");
     $facilities = [];
     //map objects to facilities
     foreach ($objects as $object) {
 
-      $location = $locationService->getLocationById($object->locationId);
-      $facility = new Facility($object->name, $object->creationDate, $location, $object->id);
+      $facility = new Facility($object->name, $object->creationDate, $object->locationId, $object->id);
       array_push($facilities, $facility);
     }
 

@@ -7,13 +7,23 @@ use App\Repositories\FacilityRepository;
 class FacilityService {
   
   private $facilityRepo;
+  private $locationService;
+  private $tagService;
 
   function __construct(){
     $this->facilityRepo = new FacilityRepository();
+    $this->locationService = new LocationService();
+    $this->tagService = new TagService();
   }
 
   public function getAllFacilities(): array {
-    return $this->facilityRepo->getAllFacilities();
+    $facilities =  $this->facilityRepo->getAllFacilities();
+
+    foreach($facilities as $f){
+      $f->setLocation($this->locationService->getLocationById($f->getLocationId()));
+      $f->setTags($this->tagService->getTagsByFacilityById($f->getId()));
+    }
+    return $facilities;
   }
 
   /**
