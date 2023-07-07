@@ -32,4 +32,20 @@ class FacilityService {
   public function createNewFacility($facility){
     return $this->facilityRepo->createNewFacility($facility);
   }
+
+  /**
+   * @param Facility $facility
+   * @return Facility
+   */
+  public function updateFacility($facility){
+    return $this->facilityRepo->updateFacility($facility);
+  }
+
+  /**
+   * @param int $id
+   * @return bool
+   */
+  public function deleteFacility($id){
+    return $this->facilityRepo->deleteFacility($id);
+  }
 }
