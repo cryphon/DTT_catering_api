@@ -114,7 +114,7 @@ class Facility implements JsonSerializable {
   public function jsonSerialize(): mixed
   {
     return [
-      'facilityId' => $this->id,
+      'id' => $this->id,
       'name' => $this->name,
       'creationDate' => $this->creationDate,
       'location' => $this->location,

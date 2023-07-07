@@ -49,11 +49,9 @@ class FacilityRepository extends Repository{
    * @return Facility
    */
   public function getFacilityById($id){
-    $locationService = new LocationService();
 
     $object = $this->db->executeGetOneRecordQuery("SELECT id, name, creationDate, locationId FROM Facility WHERE id = :id", ["id" => htmlspecialchars($id)]);
-    
-    return empty($object) ? null : new Facility($object->name, $object->creationDate, $locationService->getLocationById($object->locationId), $object->id);
+    return empty($object) ? null : new Facility($object->name, $object->creationDate, $object->locationId, $object->id);
   }
 
   /**

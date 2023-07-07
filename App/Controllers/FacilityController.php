@@ -103,7 +103,7 @@ class FacilityController extends BaseController{
 
     //check if location is valid
     if (empty($facility)){
-      return (new Status\InternalServerError(["message" => "facility with facilityId[" . $object->facilityId ."] does not exist"]))->send();
+      return (new Status\InternalServerError(["message" => "facility with id[" . $object->facilityId ."] does not exist"]))->send();
     }
 
     return (new Status\Ok($facility))->send();

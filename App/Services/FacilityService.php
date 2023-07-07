@@ -31,7 +31,10 @@ class FacilityService {
    * @return Facility
    */
   public function getFacilityById($id){
-    return $this->facilityRepo->getFacilityById($id);
+    $facility =  $this->facilityRepo->getFacilityById($id);
+    $facility->setLocation($this->locationService->getLocationById($facility->getLocationId()));
+    $facility->setTags($this->tagService->getTagsByFacilityById($facility->getId()));
+    return $facility;
   }
 
 

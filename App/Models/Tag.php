@@ -22,7 +22,7 @@ class Tag implements JsonSerializable{
 
     public function jsonSerialize(): mixed{
     return [
-      'tagId' => $this->id,
+      'id' => $this->id,
       'name' => $this->name,
     ];
   }
